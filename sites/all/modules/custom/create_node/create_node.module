@@ -29,7 +29,11 @@ function create_node_perform($args) {
   $node = new stdClass();
   $node->type = 'page';
   $node->title = "namit";
-  $node->body['und'][0]['value'] = "test";
+  $node->body['und'][0]['value'] = $args;
+  $node->uid="1";
+  $node->status=1;
+  $node->language='und';
+  $node->created=time();
   node_object_prepare($node);
   $node = node_submit($node);
   node_save($node);
