@@ -1,0 +1,36 @@
+<?php
+
+function create_node_services_resources() {
+  $index = array(
+    'create_node' => array(// My new resource
+      'create' => array(
+        'callback' => 'create_node_perform',
+        'access callback' => 'create_node_access',
+        'args' => array(
+          array(
+            'name' => 'node',
+            'optional' => FALSE,
+            'source' => 'data', // Setting the source to 'data' in your args means that any data in the POST will be passed to the callback function
+            'description' => 'The node data to create',
+            'type' => 'array',
+          ),
+        ),
+      ),
+    ),
+  );
+  return $index;
+}
+
+function create_node_access() {
+  return TRUE;
+}
+
+function create_node_perform($args) {
+  $node = new stdClass();
+  $node->type = 'page';
+  $node->title = "namit";
+  $node->body['und'][0]['value'] = "test";
+  node_object_prepare($node);
+  $node = node_submit($node);
+  node_save($node);
+}
