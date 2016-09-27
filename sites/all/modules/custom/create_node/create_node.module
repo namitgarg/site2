@@ -29,11 +29,12 @@ function create_node_perform($args) {
   $node = new stdClass();
   node_object_prepare($node);
   $node->type = 'page';
-  $node->title =  $args['title'][''];
+  $node->title =  $args['title'];
   $node->body['und'][0]['value'] = $args['body']['und'][0]['value'];
   $node->status=1;
   $filepath = 'http://localhost/site2/sites/default/files/a/after1.jpg';
   // Create managed File object and associate with Image field.
+    $myfile = fopen("D://tile.txt", "w");
   $file = (object) array(
     'uid' => 1,
     'uri' => $filepath,
@@ -44,7 +45,7 @@ function create_node_perform($args) {
   $file = file_save_data(file_get_contents($filepath),'public://' . $filename, FILE_EXISTS_RENAME);
 
   $node->field_image1[LANGUAGE_NONE][0] = (array)$file;
-  $node->field_tagline[LANGUAGE_NONE][0]['value'] ="ssss";
+  $node->field_tagline[LANGUAGE_NONE][0]['value'] =$args['field_tagline']['und'][0]['value'];
   $node->field_tagline[LANGUAGE_NONE][1]['value'] ="ttt";
   $node->field_tagline[LANGUAGE_NONE][2]['value'] ="uuuu";
   $node->language='und';
